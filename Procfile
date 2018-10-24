@@ -1,1 +1,1 @@
-worker:  bundle exec rake jobs:work
+worker:  wpm start
