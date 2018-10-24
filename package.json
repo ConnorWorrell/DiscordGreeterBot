@@ -3,9 +3,17 @@
   "version": "1.0.0",
   "description": "greeter bot for discord from tutorial",
   "main": "index.js",
+  "engines": {
+      "node": "8.x",
+      "npm": "*"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "heroku",
+    "discord.js"
+  ],
   "author": "Connor",
   "license": "ISC",
   "dependencies": {
