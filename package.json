@@ -3,13 +3,9 @@
   "version": "1.0.0",
   "description": "greeter bot for discord from tutorial",
   "main": "index.js",
-  "engines": {
-      "node": "8.x",
-      "npm": "*"
-  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-	"start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "keywords": [
     "heroku",
