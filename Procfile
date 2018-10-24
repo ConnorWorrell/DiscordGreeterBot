@@ -1,1 +1,1 @@
-worker:  wpm start
+worker:  npm start
