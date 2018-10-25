@@ -25,6 +25,25 @@ bot.on("message", async message =>{
 	let cmd = messageArray[0];
 	let args = messageArray.slice(1);
 
+	if(cmd === `${prefix}help`){
+		console.log(`Help Requested`);
+		let botembed = new Discord.RichEmbed()
+		.setDescription("Help Page")
+		.setColor("#15f153")
+		.addField("Commands:",`!help - Displays This Page!
+		!ping - Pong!
+		!serverinfo - Displays Server Info!
+		!botinfo - Displays Bot Info!
+		!report @user reason - Reports user!
+		!say message - Bot Says Message!
+		!clean - Bot Deletes Last 100 Messages!
+		`)
+		.addField("Other:", `Translation - Automatically Translates All Text Into English
+		(Powered by Yandex Translate)`);
+
+		return message.channel.send(botembed);
+	}
+
 	//Lets Play Ping Pong
 	if(cmd === `${prefix}ping`){
 		console.log(`Bot Pongs the ping`);
@@ -121,7 +140,6 @@ bot.on("message", async message =>{
 			}
 		}).then(res => {
 			if (res.data.text[0] !== message.content){//check to see if translation english -> english
-				let bicon = bot.user.displayAvatarURL;
 				let botembed = new Discord.RichEmbed()
 				.setDescription("Translation")
 				.setColor("#15f153")
