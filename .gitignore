@@ -1,3 +1,4 @@
 ImportantWebsites.txt
 botconfig.json
 node_modules/*
+.env

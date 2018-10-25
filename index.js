@@ -1,6 +1,7 @@
 //const botconfig = require("./botconfig.json");
 const Discord = require("discord.js");
 const axios = require("axios")
+require('dotenv').config();
 
 const bot = new Discord.Client({disableEveryone: true});
 
