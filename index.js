@@ -25,25 +25,6 @@ bot.on("message", async message =>{
 	let cmd = messageArray[0];
 	let args = messageArray.slice(1);
 
-	//Tranlation of all text to english using yandex's api
-	//Powered by yandex
-	axios.get('https://translate.yandex.net/api/v1.5/tr.json/translate',
-		{
-			params: {
-				key: botconfig.YANDEX_API_KEY,
-				text: message.content,
-				lang: 'en'
-			}
-		}).then(res => {
-			if (res.data.text[0] !== message.content){//check to see if translation english -> english
-				message.reply(res.data.text[0])
-				console.log(`Translated Message to english`);
-			}
-			else{
-				console.log(`Message Alreay In English`);
-			}
-		})
-
 	//Lets Play Ping Pong
 	if(cmd === `${prefix}ping`){
 		console.log(`Bot Pongs the ping`);
@@ -126,7 +107,35 @@ bot.on("message", async message =>{
 			message.channel.bulkDelete(fetched);//Delete the found messages
 		}
 		clear();
+		return;
 	}
+
+	//Tranlation of all text to english using yandex's api
+	//Powered by yandex
+	axios.get('https://translate.yandex.net/api/v1.5/tr.json/translate',
+		{
+			params: {
+				key: botconfig.YANDEX_API_KEY,
+				text: message.content,
+				lang: 'en'
+			}
+		}).then(res => {
+			if (res.data.text[0] !== message.content){//check to see if translation english -> english
+				let bicon = bot.user.displayAvatarURL;
+				let botembed = new Discord.RichEmbed()
+				.setDescription("Translation")
+				.setColor("#15f153")
+				.setDescription(`User: ${message.author}
+				Origional: ${message.content}
+				Translation: ${res.data.text[0]}`);
+
+				return message.channel.send(botembed);
+				console.log(`Translated Message to english`);
+			}
+			else{
+				console.log(`Message Alreay In English`);
+			}
+		})
 
 })
 
