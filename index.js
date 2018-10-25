@@ -4,6 +4,9 @@ const axios = require("axios")
 
 const bot = new Discord.Client({disableEveryone: true});
 
+var DiscordKey = process.env.DiscordKey;
+var YandexAPIKey = process.env.YandexAPIKey;
+
 bot.on("error", (e) => console.error(e));
 
 bot.on("ready", async () =>{
@@ -134,7 +137,7 @@ bot.on("message", async message =>{
 	axios.get('https://translate.yandex.net/api/v1.5/tr.json/translate',
 		{
 			params: {
-				key: botconfig.YANDEX_API_KEY,
+				key: YandexAPIKey,
 				text: message.content,
 				lang: 'en'
 			}
@@ -157,6 +160,6 @@ bot.on("message", async message =>{
 
 })
 
-bot.login(botconfig.token);
+bot.login(DiscordKey);
 
 
