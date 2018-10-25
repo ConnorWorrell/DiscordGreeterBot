@@ -37,6 +37,10 @@ bot.on("message", async message =>{
 		}).then(res => {
 			if (res.data.text[0] !== message.content){//check to see if translation english -> english
 				message.reply(res.data.text[0])
+				console.log(`Translated Message to english`);
+			}
+			else{
+				console.log(`Message Alreay In English`);
 			}
 		})
 
