@@ -1,6 +1,0 @@
-!ping - Pong
-!serverinfo - Bot displays server info
-!botinfo - Bot displays bot info
-!report @Player reason - Bot deletes origional message, displays message with details in #reports
-!say message - Bot says message, deletes origional message
-!clean - Bot deletes last 99 messages
