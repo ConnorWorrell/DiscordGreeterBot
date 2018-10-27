@@ -50,30 +50,10 @@ bot.on("message", async message =>{
 
 	let commandfile = bot.commands.get(cmd.toLowerCase().slice(prefix.length));
 	if(commandfile) commandfile.run(bot,message,args);
-
-	if(cmd.toLowerCase() === `${prefix}help`){
-		console.log(`Help Requested`);
-		let botembed = new Discord.RichEmbed()
-		.setDescription("Help Page")
-		.setColor("#15f153")
-		.addField("Commands:",`!help - Displays This Page!
-		!ping - Pong!
-		!serverinfo - Displays Server Info!
-		!botinfo - Displays Bot Info!
-		!report @user reason - Reports user!
-		!say message - Bot Says Message!
-		!saydelay [seconds] [message] - Bot says message after time has passed
-		!clean - Bot Deletes Last 100 Messages!
-		`)
-		.addField("Other:", `Translation - Automatically Translates All Text Into English
-		(Powered by Yandex Translate)`);
-
-		return message.channel.send(botembed);
-	}
-
-	//Tranlation of all text to english using yandex's api
-	//Powered by yandex
-	axios.get('https://translate.yandex.net/api/v1.5/tr.json/translate',
+	else{
+		//Tranlation of all text to english using yandex's api
+		//Powered by yandex
+		axios.get('https://translate.yandex.net/api/v1.5/tr.json/translate',
 		{
 			params: {
 				key: YandexAPIKey,
@@ -96,6 +76,27 @@ bot.on("message", async message =>{
 				console.log(`Message Alreay In English`);
 			}
 		})
+	}
+
+	if(cmd.toLowerCase() === `${prefix}help`){
+		console.log(`Help Requested`);
+		let botembed = new Discord.RichEmbed()
+		.setDescription("Help Page")
+		.setColor("#15f153")
+		.addField("Commands:",`!help - Displays This Page!
+		!ping - Pong!
+		!serverinfo - Displays Server Info!
+		!botinfo - Displays Bot Info!
+		!report @user reason - Reports user!
+		!say message - Bot Says Message!
+		!saydelay [seconds] [message] - Bot says message after time has passed
+		!clean - Bot Deletes Last 100 Messages!
+		`)
+		.addField("Other:", `Translation - Automatically Translates All Text Into English
+		(Powered by Yandex Translate)`);
+
+		return message.channel.send(botembed);
+	}
 
 })
 
