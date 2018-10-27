@@ -7,6 +7,7 @@ const bot = new Discord.Client({disableEveryone: true});
 
 var DiscordKey = process.env.DiscordKey;
 var YandexAPIKey = process.env.YandexAPIKey;
+let prefix = process.env.Prefix;
 
 bot.on("error", (e) => console.error(e));
 
@@ -24,12 +25,12 @@ bot.on("message", async message =>{
 	if(message.author.bot) return;
 	if(message.channel.type === "dm") return;
 
-	let prefix = process.env.Prefix;
+	
 	let messageArray = message.content.split(" ");
 	let cmd = messageArray[0];
 	let args = messageArray.slice(1);
 
-	if(cmd === `${prefix}help`){
+	if(cmd.toLowerCase() === `${prefix}help`){
 		console.log(`Help Requested`);
 		let botembed = new Discord.RichEmbed()
 		.setDescription("Help Page")
@@ -40,6 +41,7 @@ bot.on("message", async message =>{
 		!botinfo - Displays Bot Info!
 		!report @user reason - Reports user!
 		!say message - Bot Says Message!
+		!delaysay [seconds] [message] - Bot says message after time has passed
 		!clean - Bot Deletes Last 100 Messages!
 		`)
 		.addField("Other:", `Translation - Automatically Translates All Text Into English
@@ -49,13 +51,13 @@ bot.on("message", async message =>{
 	}
 
 	//Lets Play Ping Pong
-	if(cmd === `${prefix}ping`){
+	if(cmd.toLowerCase() === `${prefix}ping`){
 		console.log(`Bot Pongs the ping`);
 		return message.channel.send("Pong");
 	}
 
 	//Display server info
-	if(cmd === `${prefix}serverinfo`){
+	if(cmd.toLowerCase() === `${prefix}serverinfo`){
 
 		console.log(`Bot Displayed Server Info`);
 
@@ -74,7 +76,7 @@ bot.on("message", async message =>{
 	}
 
 	//Display bot info
-	if(cmd === `${prefix}botinfo`){
+	if(cmd.toLowerCase() === `${prefix}botinfo`){
 		console.log(`Bot Displayed Info`);
 		let bicon = bot.user.displayAvatarURL;
 		let botembed = new Discord.RichEmbed()
@@ -88,7 +90,7 @@ bot.on("message", async message =>{
 	}
 
 	//Report Command
-	if(cmd === `${prefix}report`){
+	if(cmd.toLowerCase() === `${prefix}report`){
 		console.log(`User Reported`);
 		let rUser = message.guild.member(message.mentions.users.first()  || message.guild.members.get(args[0]));//First user mentioned is user being reported
 		if(!rUser) return message.channel.send("Couldn't find user.");//Check to see if user was reported
@@ -114,15 +116,27 @@ bot.on("message", async message =>{
 	}
 
 	//Make the bot say something
-	if(cmd === `${prefix}say`){
+	if(cmd.toLowerCase() === `${prefix}say`){
 		messageReturned = messageArray.slice(1).join(" ");//Remove "!say" from beginning of message
 		console.log(`Deleted ${message}, Responded ${messageReturned}`);
 		message.delete().catch(O_o=>{});
 		return message.channel.send(messageReturned);
 	}
 
+	if(cmd.toLowerCase() === `${prefix}delaysay`){
+		messageReturned = messageArray.slice(2).join(" ");//Remove "!say" from beginning of message
+		console.log(`Deleted ${message}, Responded ${messageReturned}`);
+		//console.log(parseInt(messageArray[1],10)*1000);
+		message.delete().catch(O_o=>{});
+
+		var delayMessage = setTimeout(sendMessage.bind(null,messageReturned), parseInt(messageArray[1],10)*1000);
+		function sendMessage(msg){
+			return message.channel.send(msg);
+		}
+	}
+
 	//Delete last 100 messages
-	if(cmd === `${prefix}clean`){
+	if(cmd.toLowerCase() === `${prefix}clean`){
 		console.log(`Cleaned Messages`);
 		async function clear() {
 			message.delete().catch(O_o=>{});//Delete clean message
