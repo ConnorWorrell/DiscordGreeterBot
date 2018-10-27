@@ -137,6 +137,9 @@ bot.on("message", async message =>{
 
 	//Delete last 100 messages
 	if(cmd.toLowerCase() === `${prefix}clean`){
+
+		if(!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send("Error: Impropper Permissions");
+
 		console.log(`Cleaned Messages`);
 		async function clear() {
 			message.delete().catch(O_o=>{});//Delete clean message
