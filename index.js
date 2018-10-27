@@ -98,7 +98,7 @@ bot.on("message", async message =>{
 
 		let reportEmbed = new Discord.RichEmbed()
 		.setDescription("Reports")
-		.setColor("#15f153")
+		.setColor("#dfe83a")
 		.addField("Reported User", `${rUser} with ID: ${rUser.id}`)
 		.addField("Reported By", `${message.author} with ID: ${message.author.id}`)
 		.addField("Channel", message.channel)
@@ -160,6 +160,7 @@ bot.on("message", async message =>{
 
 		let kickEmbed = new Discord.RichEmbed()
 		.setDescription("Kick")
+		.setColor("#efb61a")
 		.addField("Kicked User", `${kUser} with ID ${kUser.id}`)
 		.addField("Kicked By", `<@${message.author.id}> with ID ${message.author.id}`)
 		.addField("Kicked In", message.channel)
@@ -184,6 +185,7 @@ bot.on("message", async message =>{
 
 		let banEmbed = new Discord.RichEmbed()
 		.setDescription("Ban")
+		.setColor("#cc100a")
 		.addField("Banned User", `${bUser} with ID ${bUser.id}`)
 		.addField("Banned By", `<@${message.author.id}> with ID ${message.author.id}`)
 		.addField("Banned In", message.channel)
