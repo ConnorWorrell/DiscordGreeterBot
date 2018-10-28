@@ -2,11 +2,11 @@
 This project is making a discord bot to help me learn various things. It follows loosely along the tutorial on YouTube by {TheSourceCode}  
 [https://www.youtube.com/channel/UCNXt2MrZaqfIBknamqwzeXA](https://www.youtube.com/channel/UCNXt2MrZaqfIBknamqwzeXA "{TheSourceCode}")
 
-###Add to your server:
+### Add to your server:
 If you want to add the bot to your server use:  
 [https://discordapp.com/oauth2/authorize?client_id=504412462448115712&scope=bot&permissions=8](https://discordapp.com/oauth2/authorize?client_id=504412462448115712&scope=bot&permissions=8 "ChemicalCoalBot Add To Server")
 
-###Commands:
+### Commands:
 - !help - Displays help menu
 - !ping - Pong
 - !serverinfo - Displays Server Info
@@ -18,5 +18,5 @@ If you want to add the bot to your server use:
 - !saydelay seconds message - bot says your message after so many seconds
 - !clean - Bot deletes last 100 messages
 
-###Miscellaneous:
+### Miscellaneous:
 - Bot attempts to translate everything into English using Yandex Translate
