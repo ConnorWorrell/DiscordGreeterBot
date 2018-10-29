@@ -30,10 +30,23 @@ fs.readdir("./commands/", (err, files) => {
 bot.on("error", (e) => console.error(e));
 
 bot.on("ready", async () =>{
-
 	console.log(`${bot.user.username} is online!`)
 	bot.user.setActivity("with BOTy");
 
+	//unmute anyone who is muted on startup since bot won't unmute them if it restarts
+	const guild = bot.guilds.map(g => g.name);
+	for (i = 0; i < guild.length; i++){
+		iguild = bot.guilds.find(x => x.name = guild[i])
+		const member = iguild.members.map(x => x.id);
+		for (j = 0; j < member.length; j++){
+			if(iguild.member(member[j]).roles.find(x => x.id === iguild.roles.find(x => x.name === 'muted').id) !== null) {
+				console.log("Unmuted");
+				let mutedMember = iguild.member(member[j]);
+				const muterole = iguild.roles.find(x => x.name === 'muted');
+				mutedMember.removeRole(muterole.id);
+			}
+		}
+	}
 })
 
 bot.on("message", async message =>{
@@ -49,6 +62,13 @@ bot.on("message", async message =>{
 	let args = messageArray.slice(1);
 
 	let commandfile = bot.commands.get(cmd.toLowerCase().slice(prefix.length));
+
+	//If muted then delete any message they type in
+	if(message.member.roles.find(x => x.name === "muted")){
+		console.log("Deleted muted message");
+		return message.delete().catch(O_o=>{});
+	}
+
 	if(commandfile) commandfile.run(bot,message,args);
 	else{
 		//Tranlation of all text to english using yandex's api
